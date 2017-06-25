@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             
             // Our Bundle,
             new BlogBundle\BlogBundle(),
+            new CommentBundle\CommentBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -3,6 +3,7 @@
 namespace BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use BlogBundle\Entity;
 
 /**
  * Article
@@ -49,6 +50,17 @@ class Article
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CommentBundle\Entity\Comment")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
+     */
+    private $comment;
 
     /**
      * Get id
@@ -155,5 +167,53 @@ class Article
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set categories
+     *
+     * @param Category $categories
+     *
+     * @return Article
+     */
+    public function setCategories(Category $categories = null)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Category
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param \CommentBundle\Entity\Comment $comment
+     *
+     * @return Article
+     */
+    public function setComment(\CommentBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \CommentBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

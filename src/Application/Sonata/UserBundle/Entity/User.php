@@ -43,5 +43,10 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="SFBlog\BlogBundle\Entity\Article", mappedBy="author")
      */
+    private $editor;
 
+    /**
+     * @ORM\OneToMany(targetEntity="SFBlog\CommentBundle\Entity\Comment", mappedBy="author")
+     */
+    private $userComment;
 }

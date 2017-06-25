@@ -1,17 +1,17 @@
 <?php
 
-namespace BlogBundle\Entity;
+namespace CommentBundle\Entity;
 
+use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use BlogBundle\Entity;
 
 /**
- * Article
+ * Comment
  *
- * @ORM\Table(name="article")
- * @ORM\Entity(repositoryClass="BlogBundle\Repository\ArticleRepository")
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="CommentBundle\Repository\CommentRepository")
  */
-class Article
+class Comment
 {
     /**
      * @var int
@@ -43,7 +43,6 @@ class Article
      */
     private $publication;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -51,16 +50,9 @@ class Article
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Category")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Article", mappedBy="comment")
      */
-    private $categories;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="CommentBundle\Entity\Comment")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
-     */
-    private $comment;
+    private $userComment;
 
     /**
      * Get id
@@ -77,7 +69,7 @@ class Article
      *
      * @param string $title
      *
-     * @return Article
+     * @return Comment
      */
     public function setTitle($title)
     {
@@ -101,7 +93,7 @@ class Article
      *
      * @param string $content
      *
-     * @return Article
+     * @return Comment
      */
     public function setContent($content)
     {
@@ -125,7 +117,7 @@ class Article
      *
      * @param \DateTime $publication
      *
-     * @return Article
+     * @return Comment
      */
     public function setPublication($publication)
     {
@@ -144,15 +136,14 @@ class Article
         return $this->publication;
     }
 
-
     /**
      * Set author
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $author
+     * @param User $author
      *
-     * @return Article
+     * @return Comment
      */
-    public function setAuthor(\Application\Sonata\UserBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
 
@@ -162,34 +153,51 @@ class Article
     /**
      * Get author
      *
-     * @return \Application\Sonata\UserBundle\Entity\User
+     * @return User
      */
     public function getAuthor()
     {
         return $this->author;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userComment = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Set categories
+     * Add userComment
      *
-     * @param Category $categories
+     * @param \BlogBundle\Entity\Article $userComment
      *
-     * @return Article
+     * @return Comment
      */
-    public function setCategories(Category $categories = null)
+    public function addUserComment(\BlogBundle\Entity\Article $userComment)
     {
-        $this->categories = $categories;
+        $this->userComment[] = $userComment;
 
         return $this;
     }
 
     /**
-     * Get categories
+     * Remove userComment
      *
-     * @return Category
+     * @param \BlogBundle\Entity\Article $userComment
      */
-    public function getCategories()
+    public function removeUserComment(\BlogBundle\Entity\Article $userComment)
     {
-        return $this->categories;
+        $this->userComment->removeElement($userComment);
+    }
+
+    /**
+     * Get userComment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserComment()
+    {
+        return $this->userComment;
     }
 }
