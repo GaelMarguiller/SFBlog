@@ -10,15 +10,15 @@ blog_article:
     resource: "@BlogBundle/Controller/ArticleController.php"
     type:     annotation
 
-comment:
-    resource: "@CommentBundle/Controller/"
+blog:
+    resource: "@BlogBundle/Controller/"
     type:     annotation
     prefix:   /
 
 blog:
     resource: "@BlogBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /category
 
 sonata_user_admin_security:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'

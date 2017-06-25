@@ -1,1 +1,13 @@
-Hello World!
+{% extends 'BlogBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Articles list</h1>
+    <div class="container">
+        {% for article in articles %}
+            <a href="{{ path('article_show', { 'id': article.id }) }}"><h2>{{ article.title }}</h2></a>
+            <div>{{ article.content|truncate(200, true) }}</div>
+            <div>{{ article.author }}</div><div>{{ article.categories }}</div>
+            {% if article.publication %}{{ article.publication|date('Y-m-d') }}{% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -29,11 +29,6 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
  */
 class User extends BaseUser
 {
-    public function __construct() {
-        $this->editor = new Article();
-        $this->userComment = new Comment();
-
-    }
 
     /**
      * @var int $id
