@@ -11,6 +11,10 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use BlogBundle\Entity\Article;
+use CommentBundle\Entity\Comment;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -25,6 +29,12 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
  */
 class User extends BaseUser
 {
+    public function __construct() {
+        $this->editor = new Article();
+        $this->userComment = new Comment();
+
+    }
+
     /**
      * @var int $id
      */
@@ -41,12 +51,12 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="SFBlog\BlogBundle\Entity\Article", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="\BlogBundle\Entity\Article", mappedBy="author")
      */
     private $editor;
 
     /**
-     * @ORM\OneToMany(targetEntity="SFBlog\CommentBundle\Entity\Comment", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="\CommentBundle\Entity\Comment", mappedBy="author")
      */
     private $userComment;
 }

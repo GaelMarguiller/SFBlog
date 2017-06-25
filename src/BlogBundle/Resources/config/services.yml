@@ -1,4 +1,12 @@
 services:
-#    blog.example:
-#        class: BlogBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    admin.article:
+        class: BlogBundle\Admin\ArticleAdmin
+        arguments: [~, BlogBundle\Entity\Article, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Blog, group: "article" }
+
+    admin.category:
+        class: BlogBundle\Admin\CategoryAdmin
+        arguments: [~, BlogBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Blog, group: "category" }

@@ -44,7 +44,7 @@ class Comment
     private $publication;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="userComment")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $author;

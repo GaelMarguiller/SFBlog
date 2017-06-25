@@ -2,6 +2,8 @@
 
 namespace BlogBundle\Entity;
 
+use Application\Sonata\UserBundle\Entity\User;
+use CommentBundle\Entity\Comment;
 use Doctrine\ORM\Mapping as ORM;
 use BlogBundle\Entity;
 
@@ -45,7 +47,7 @@ class Article
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="editor")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $author;
@@ -148,11 +150,11 @@ class Article
     /**
      * Set author
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $author
+     * @param User $author
      *
      * @return Article
      */
-    public function setAuthor(\Application\Sonata\UserBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
 
@@ -162,7 +164,7 @@ class Article
     /**
      * Get author
      *
-     * @return \Application\Sonata\UserBundle\Entity\User
+     * @return User
      */
     public function getAuthor()
     {
@@ -196,11 +198,11 @@ class Article
     /**
      * Set comment
      *
-     * @param \CommentBundle\Entity\Comment $comment
+     * @param Comment $comment
      *
      * @return Article
      */
-    public function setComment(\CommentBundle\Entity\Comment $comment = null)
+    public function setComment(Comment $comment = null)
     {
         $this->comment = $comment;
 
@@ -210,7 +212,7 @@ class Article
     /**
      * Get comment
      *
-     * @return \CommentBundle\Entity\Comment
+     * @return Comment
      */
     public function getComment()
     {
